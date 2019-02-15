@@ -7,6 +7,7 @@ Run `npx io-serve` inside any directory -- now you have a server running at `htt
 | Verb | Action
 | ------ | -------------
 | GET | Returns the corresponding file descending from the current working directory
+| HEAD | Same as GET, but returns no file data, only headers and status code.
 | PUT | Write the request body to the corresponding file. Directories are automatically created.
 | PATCH | Append the request body to the corresponding file. Directories are automatically created.
 | DELETE | Delete the corresponding file or directory.
