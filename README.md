@@ -1,19 +1,25 @@
 # io-serve
 
-npx-compatible server for simple file i/o over HTTP.
+npx-compatible REST API for simple file i/o over HTTP.
 
 Run `npx io-serve` inside any directory -- now you have a server running at `http://localhost:33333`.
 
-Sending a GET request to any path will serve up the corresponding file descending from the current working directory.
-
-Sending a POST request to any path will write the request body to the corresponding file. Directories are automatically created.
+| Verb | Action
+| ------ | -------------
+| GET | Returns the corresponding file descending from the current working directory
+| PUT | Write the request body to the corresponding file. Directories are automatically created.
+| PATCH | Append the request body to the corresponding file. Directories are automatically created.
+| DELETE | Delete the corresponding file or directory.
+| POST | Unimplemented.
 
 If you GET a directory, you will receive a JSON array of the files and directories inside. Directory names in the listing are appended with a `/`.\
 You can distinguish files from directories with the `X-Resource-Type` header which is either `file` or `directory`.
 
 If you GET a path that doesn't exist, the status code will be `404`. If you GET something that isn't a file or directory (like a socket) the status code will be `415`.
 
-If you POST to a directory, the directory will be deleted and a new file will be created in its place.
+If you PATCH or PUT to a directory, the directory will be deleted and a new file will be created in its place.
+
+For environments that do not support the preceding methods, you can instead send a POST request specifying the `X-HTTP-Method-Override` header set to the uppercase method name you wish to override.
 
 ## Options
 
