@@ -58,7 +58,7 @@ app.route('*')
   })
   .put(async (req: express.Request, res: express.Response) => {
     const filePath = getPath(req)
-    console.log(`${chalk.black.bgMagenta('POST')} ${filePath}`)
+    console.log(`${chalk.black.bgMagenta('PUT')} ${filePath}`)
 
     await unblockPath(filePath)
     await fs.writeFile(filePath, req.body)
